@@ -6,7 +6,7 @@ from sqlalchemy.future import select
 from app.db import get_db
 from app.models import User, Admin, Teacher, Student, Class, Subject
 from app.schemas import (
-    UserCreate, UserOut,
+    UserCreate, UserUpdate, UserOut,
     AdminCreate, AdminOut,
     TeacherCreate, TeacherOut,
     StudentCreate, StudentOut,
@@ -66,7 +66,7 @@ async def create_user(
 @router.put("/users/{user_id}", response_model=UserOut)
 async def update_user(
     user_id: int,
-    payload: UserCreate,
+    payload: UserUpdate,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(is_admin)
 ):

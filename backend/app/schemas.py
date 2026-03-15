@@ -45,6 +45,13 @@ class UserCreate(BaseModel):
     email: EmailStr
     status: StatusEnum = StatusEnum.active
 
+class UserUpdate(BaseModel):
+    username: str
+    password: Optional[str] = None  # Optional: only update if provided
+    role: RoleEnum
+    email: EmailStr
+    status: StatusEnum = StatusEnum.active
+
 class UserOut(BaseModel):
     user_id: int
     username: str
