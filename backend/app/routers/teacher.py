@@ -54,12 +54,23 @@ async def get_students_for_subject(
     if not subject:
         raise HTTPException(status_code=404, detail="Subject not found")
 
-    # get all students in that subject's class
+    # get all students in that subject's class and join with User to get username
     result = await db.execute(
-        select(Student).where(Student.class_id == subject.class_id)
+        select(Student, User.username)
+        .join(User, Student.user_id == User.user_id)
+        .where(Student.class_id == subject.class_id)
     )
-    students = result.scalars().all()
-    return students
+    
+    students_data = []
+    for student, username in result.all():
+        students_data.append({
+            "id": student.stu_id,
+            "username": username,
+            "roll_no": student.roll_no,
+            "user_id": student.user_id
+        })
+        
+    return students_data
 
 
 # ─────────────────────────────────────────

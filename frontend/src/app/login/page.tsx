@@ -18,17 +18,9 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // First try standard JSON. If FastAPI explicitly requires form-data, we will adjust
-      // But based on typical use cases, let's try an object or URLSearchParams
-      // We'll use URLSearchParams since FastAPI OAuth2 relies on form data by default.
-      const params = new URLSearchParams();
-      params.append('username', username);
-      params.append('password', password);
-
-      const res = await api.post('/api/auth/login', params, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+      const res = await api.post('/api/auth/login', {
+        username: username,
+        password: password,
       });
 
       const { access_token, role } = res.data;

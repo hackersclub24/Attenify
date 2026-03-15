@@ -5,20 +5,21 @@ import api from '../../../../lib/axios';
 import { BookOpen, PlusCircle, Loader2 } from 'lucide-react';
 
 interface SubjectData {
-  id: number;
+  sub_id: number;
   sub_name: string;
   teacher_id: number;
   class_id: number;
+  teacher_name?: string; // Newly added from backend
 }
 
 interface UserData {
-  id: number;
+  user_id: number;
   username: string;
   role: string;
 }
 
 interface ClassData {
-  id: number;
+  class_id: number;
   class_name: string;
   section: string;
 }
@@ -86,9 +87,8 @@ export default function AdminSubjectsPage() {
     }
   };
 
-  const getTeacherName = (tId: number) => teachers.find(t => t.id === tId)?.username || 'Unknown';
   const getClassName = (cId: number) => {
-    const cls = classes.find(c => c.id === cId);
+    const cls = classes.find(c => c.class_id === cId);
     return cls ? `${cls.class_name} - ${cls.section}` : 'Unknown';
   };
 
@@ -123,7 +123,7 @@ export default function AdminSubjectsPage() {
               <select required value={teacherId} onChange={(e) => setTeacherId(e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 p-2 text-sm shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
                 <option value="">-- Select Teacher --</option>
                 {teachers.map(t => (
-                  <option key={t.id} value={t.id}>{t.username}</option>
+                  <option key={t.user_id} value={t.user_id}>{t.username}</option>
                 ))}
               </select>
             </div>
@@ -132,7 +132,7 @@ export default function AdminSubjectsPage() {
               <select required value={classId} onChange={(e) => setClassId(e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 p-2 text-sm shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
                 <option value="">-- Select Class --</option>
                 {classes.map(c => (
-                  <option key={c.id} value={c.id}>{c.class_name} - {c.section}</option>
+                  <option key={c.class_id} value={c.class_id}>{c.class_name} - {c.section}</option>
                 ))}
               </select>
             </div>
@@ -170,13 +170,15 @@ export default function AdminSubjectsPage() {
                   </tr>
                 ) : (
                   subjects.map((s) => (
-                    <tr key={s.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{s.id}</td>
+                    <tr key={s.sub_id} className="hover:bg-slate-50 transition-colors">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{s.sub_id}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 border-l border-blue-100 flex items-center gap-2">
                         <BookOpen size={16} className="text-blue-500" />
                         {s.sub_name}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-600">{getTeacherName(s.teacher_id)}</td>
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-600">
+                        {s.teacher_name || `ID: ${s.teacher_id}`}
+                      </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-600">
                         <span className="bg-slate-100 text-slate-700 px-2 py-1 rounded-md text-xs font-medium border border-slate-200">
                           {getClassName(s.class_id)}

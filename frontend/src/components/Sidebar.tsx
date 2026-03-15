@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
-import { Users, BookOpen, Presentation, CalendarCheck, LogOut } from 'lucide-react';
+import { Users, BookOpen, Presentation, CalendarCheck, LogOut, GraduationCap } from 'lucide-react';
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -14,6 +14,7 @@ export function Sidebar() {
   const links = {
     admin: [
       { name: 'Users', href: '/dashboard/admin', icon: Users },
+      { name: 'Students', href: '/dashboard/admin/students', icon: GraduationCap },
       { name: 'Classes', href: '/dashboard/admin/classes', icon: Presentation },
       { name: 'Subjects', href: '/dashboard/admin/subjects', icon: BookOpen },
     ],
