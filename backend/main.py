@@ -3,7 +3,7 @@ from app.db import engine,Base,get_db
 from contextlib import asynccontextmanager
 # import models
 from app.models import User
-
+from app.routers import auth ,admin,teacher,student
 # app = FastAPI()
 
 
@@ -31,3 +31,9 @@ async def startup():
     print("Connecting to DB...")
     async with engine.begin() as conn:
         print(" DB connected!")
+
+
+app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
+app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+app.include_router(teacher.router, prefix="/api/teacher", tags=["Teacher"]) 
+app.include_router(student.router, prefix="/api/student", tags=["Student"])
