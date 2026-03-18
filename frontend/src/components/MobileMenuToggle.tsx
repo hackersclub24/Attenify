@@ -9,7 +9,7 @@ export function MobileMenuToggle() {
   return (
     <button
       onClick={toggleMenu}
-      className="hidden rounded-lg p-2 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
+      className="rounded-lg p-2 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
       aria-label="Toggle menu"
     >
       {isOpen ? <X size={24} /> : <Menu size={24} />}
