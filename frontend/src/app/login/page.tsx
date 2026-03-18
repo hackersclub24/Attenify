@@ -18,7 +18,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const trimmedUsername = username.trim();
+      const trimmedUsername = username.trim().toLowerCase();
       const trimmedPassword = password.trim();
 
       const res = await api.post('/api/auth/login', {
