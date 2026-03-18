@@ -67,9 +67,9 @@ export default function AdminUsersPage() {
     setIsSubmitting(true);
     setMessage('');
 
-    // Trim whitespace and convert to lowercase
-    const trimmedUsername = username.trim().toLowerCase();
-    const trimmedEmail = email.trim().toLowerCase();
+    // Trim whitespace from input fields
+    const trimmedUsername = username.trim();
+    const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
     const payload: any = { username: trimmedUsername, email: trimmedEmail, role, status };
