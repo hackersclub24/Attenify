@@ -67,9 +67,14 @@ export default function AdminUsersPage() {
     setIsSubmitting(true);
     setMessage('');
 
-    const payload: any = { username, email, role, status };
-    if (password) {
-      payload.password = password; // Only send password if it was entered
+    // Trim whitespace from input fields silently
+    const trimmedUsername = username.trim();
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    const payload: any = { username: trimmedUsername, email: trimmedEmail, role, status };
+    if (trimmedPassword) {
+      payload.password = trimmedPassword; // Only send password if it was entered
     }
 
     try {
@@ -79,12 +84,12 @@ export default function AdminUsersPage() {
         setMessage('User updated successfully!');
       } else {
         // Create new user (requires password)
-        if (!password) {
+        if (!trimmedPassword) {
           setMessage('Password is required for new users.');
           setIsSubmitting(false);
           return;
         }
-        await api.post('/api/admin/users', { ...payload, password });
+        await api.post('/api/admin/users', { ...payload, password: trimmedPassword });
         setMessage('User created successfully!');
       }
       

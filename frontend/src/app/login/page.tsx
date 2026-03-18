@@ -18,9 +18,12 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
+      const trimmedUsername = username.trim();
+      const trimmedPassword = password.trim();
+
       const res = await api.post('/api/auth/login', {
-        username: username,
-        password: password,
+        username: trimmedUsername,
+        password: trimmedPassword,
       });
 
       const { access_token, role } = res.data;
@@ -41,31 +44,33 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-6 shadow-xl sm:p-10">
-        <div className="text-center">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-6 rounded-2xl bg-white p-6 shadow-xl sm:space-y-8 sm:p-10">
+        <div className="text-center space-y-3 sm:space-y-4">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 sm:h-16 sm:w-16">
             <LogIn size={24} className="sm:h-8 sm:w-8" />
           </div>
-          <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:mt-6 sm:text-3xl">
-            Sign in to Attenify
-          </h2>
-          <p className="mt-2 text-xs text-slate-600 sm:text-sm">
-            Academic Attendance Management System
-          </p>
+          <div>
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+              Sign in to Attenify
+            </h2>
+            <p className="mt-1.5 text-xs text-slate-600 sm:mt-2 sm:text-sm">
+              Academic Attendance Management System
+            </p>
+          </div>
         </div>
 
-        <form className="mt-6 space-y-6 sm:mt-8" onSubmit={handleLogin}>
+        <form className="space-y-5 sm:space-y-6" onSubmit={handleLogin}>
           {error && (
-            <div className="flex gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-600 sm:p-4 sm:text-sm">
+            <div className="flex gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-600 sm:p-4 sm:text-sm border border-red-200">
               <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
               <p>{error}</p>
             </div>
           )}
 
-          <div className="space-y-4 rounded-md shadow-sm">
+          <div className="space-y-4 sm:space-y-5">
             <div>
-              <label className="mb-1 block text-sm font-medium text-slate-700" htmlFor="username">
+              <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="username">
                 Username
               </label>
               <input
@@ -73,14 +78,14 @@ export default function LoginPage() {
                 name="username"
                 type="text"
                 required
-                className="relative block w-full appearance-none rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                className="relative block w-full appearance-none rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-slate-700" htmlFor="password">
+              <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="password">
                 Password
               </label>
               <input
@@ -88,7 +93,7 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 required
-                className="relative block w-full appearance-none rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                className="relative block w-full appearance-none rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -96,7 +101,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div>
+          <div className="pt-2">
             <button
               type="submit"
               disabled={isLoading}
