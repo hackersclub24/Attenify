@@ -41,24 +41,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-10 shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-6 shadow-xl sm:p-10">
         <div className="text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-            <LogIn size={32} />
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 sm:h-16 sm:w-16">
+            <LogIn size={24} className="sm:h-8 sm:w-8" />
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900">
+          <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:mt-6 sm:text-3xl">
             Sign in to Attenify
           </h2>
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="mt-2 text-xs text-slate-600 sm:text-sm">
             Academic Attendance Management System
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+        <form className="mt-6 space-y-6 sm:mt-8" onSubmit={handleLogin}>
           {error && (
-            <div className="flex items-center gap-2 rounded-lg bg-red-50 p-4 text-sm text-red-600">
-              <AlertCircle size={16} />
+            <div className="flex gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-600 sm:p-4 sm:text-sm">
+              <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
               <p>{error}</p>
             </div>
           )}
@@ -100,7 +100,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative flex w-full justify-center rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400"
+              className="group relative flex w-full justify-center rounded-lg border border-transparent bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400 sm:py-3"
             >
               {isLoading ? (
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>

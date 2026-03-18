@@ -114,13 +114,13 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900">Manage Users</h1>
-        <p className="mt-2 text-slate-600">Create, edit, and manage admin, teacher, and student accounts.</p>
+        <h1 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">Manage Users</h1>
+        <p className="mt-2 text-sm text-slate-600 sm:text-base">Create, edit, and manage admin, teacher, and student accounts.</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
         {/* Form */}
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm h-fit">
           <div className="mb-4 flex items-center justify-between">
