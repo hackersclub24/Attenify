@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 # import models
 from app.models import User
-from app.routers import auth, admin, teacher, student
+from app.routers import auth, admin, teacher, student, public
 
 # app = FastAPI()
 
@@ -53,3 +53,4 @@ app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 app.include_router(teacher.router, prefix="/api/teacher", tags=["Teacher"])
 app.include_router(student.router, prefix="/api/student", tags=["Student"])
+app.include_router(public.router, prefix="/api/public", tags=["Public"])

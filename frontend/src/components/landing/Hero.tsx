@@ -1,9 +1,40 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { ArrowRight, Zap } from 'lucide-react';
 import Link from 'next/link';
+import api from '../../lib/axios';
+
+interface LandingStats {
+  classes: number;
+  students: number;
+  present_rate: number;
+  working_days: number;
+}
+
+const defaultStats: LandingStats = {
+  classes: 0,
+  students: 0,
+  present_rate: 0,
+  working_days: 0,
+};
 
 export function Hero() {
+  const [stats, setStats] = useState<LandingStats>(defaultStats);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await api.get('/api/public/landing-stats');
+        setStats(res.data);
+      } catch (error) {
+        console.error('Failed to fetch landing stats', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
     <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-32">
       {/* Background gradient */}
@@ -56,18 +87,18 @@ export function Hero() {
             {/* Social Proof */}
             <div className="flex items-center gap-6 border-t border-slate-200 pt-8">
               <div>
-                <p className="text-2xl font-bold text-slate-900">100+</p>
-                <p className="text-sm text-slate-600">Schools Trust Us</p>
+                <p className="text-2xl font-bold text-slate-900">{stats.classes}+</p>
+                <p className="text-sm text-slate-600">Classes Running</p>
               </div>
               <div className="h-12 w-px bg-slate-200" />
               <div>
-                <p className="text-2xl font-bold text-slate-900">50k+</p>
+                <p className="text-2xl font-bold text-slate-900">{stats.students}+</p>
                 <p className="text-sm text-slate-600">Students Tracked</p>
               </div>
               <div className="h-12 w-px bg-slate-200" />
               <div>
-                <p className="text-2xl font-bold text-slate-900">99.9%</p>
-                <p className="text-sm text-slate-600">Uptime SLA</p>
+                <p className="text-2xl font-bold text-slate-900">{stats.present_rate}%</p>
+                <p className="text-sm text-slate-600">Attendance Rate</p>
               </div>
             </div>
           </div>
