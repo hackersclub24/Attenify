@@ -34,7 +34,7 @@ export default function TeacherSubjectsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900">My Subjects</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">My Subjects</h1>
         <p className="mt-2 text-slate-600">Select a subject to mark attendance or view records.</p>
       </div>
 
@@ -55,7 +55,7 @@ export default function TeacherSubjectsPage() {
                   <div className="mb-4 inline-flex rounded-lg bg-blue-100 p-3 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <BookOpen size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900">{sub.sub_name}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{sub.sub_name}</h3>
                   <p className="mt-2 text-sm text-slate-500">
                     Subject ID: #{sub.sub_id}
                   </p>

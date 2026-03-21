@@ -111,11 +111,11 @@ export default function SubjectAttendancePage() {
       <div>
         <button
           onClick={() => router.push('/dashboard/teacher')}
-          className="mb-4 flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+          className="mb-4 flex items-center text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
         >
           <ArrowLeft size={16} className="mr-1" /> Back to Subjects
         </button>
-        <h1 className="text-3xl font-extrabold text-slate-900">Mark Attendance</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Mark Attendance</h1>
         <p className="mt-2 text-slate-600">Subject ID: {subId}</p>
       </div>
 
@@ -124,14 +124,14 @@ export default function SubjectAttendancePage() {
         <div className="lg:col-span-2 space-y-6">
           <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
             <div className="border-b border-slate-200 bg-slate-50 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <h2 className="text-lg font-bold text-slate-800">Student List</h2>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Student List</h2>
               <div className="flex items-center gap-2">
                 <Calendar size={18} className="text-slate-500" />
                 <input
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="rounded-md border-slate-300 py-1.5 pl-3 pr-10 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="rounded-md border border-slate-300 bg-white py-1.5 pl-3 pr-10 text-sm text-slate-900 shadow-sm [color-scheme:light] focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:[color-scheme:dark]"
                   required
                 />
               </div>
@@ -164,7 +164,7 @@ export default function SubjectAttendancePage() {
                         const isPresent = attendance[student.id] === 'present';
                         return (
                           <tr key={student.id} className="hover:bg-slate-50 transition-colors">
-                            <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">
+                            <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100">
                               {student.username}
                             </td>
                             <td className="whitespace-nowrap px-6 py-4 text-right">
@@ -203,7 +203,7 @@ export default function SubjectAttendancePage() {
 
         {/* Past Records View */}
         <div className="lg:col-span-1 border-l-0 lg:border-l border-t lg:border-t-0 border-slate-200 pt-8 lg:pt-0 lg:pl-8">
-          <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+          <h2 className="mb-6 flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
             <Calendar size={20} className="text-blue-600" />
             Past Records
           </h2>
@@ -220,7 +220,7 @@ export default function SubjectAttendancePage() {
                 return (
                   <div key={record.id || idx} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="font-semibold text-slate-900">{record.date}</span>
+                      <span className="font-semibold text-slate-900 dark:text-slate-100">{record.date}</span>
                       <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-600">
                         Total: {total}
                       </span>

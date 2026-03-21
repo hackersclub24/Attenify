@@ -40,7 +40,7 @@ export default function StudentDashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900">My Attendance</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">My Attendance</h1>
         <p className="mt-2 text-slate-600">Overview of your attendance across all enrolled subjects.</p>
       </div>
 
@@ -69,7 +69,7 @@ export default function StudentDashboardPage() {
                   <div className="rounded-lg bg-blue-100 p-2.5 text-blue-600">
                     <BookOpen size={20} />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 line-clamp-1 flex-1" title={item.subject}>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 line-clamp-1 flex-1" title={item.subject}>
                     {item.subject}
                   </h3>
                 </div>

@@ -128,7 +128,7 @@ export default function AdminUsersPage() {
               <Users size={24} />
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold text-slate-900">Manage Users</h1>
+              <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Manage Users</h1>
               <p className="text-sm text-slate-600">Create, edit, and manage admin, teacher, and student accounts.</p>
             </div>
           </div>
@@ -143,12 +143,12 @@ export default function AdminUsersPage() {
               {editingUserId ? (
                 <>
                   <Edit size={20} className="text-amber-600" />
-                  <h2 className="text-lg font-bold text-slate-900">Edit User</h2>
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Edit User</h2>
                 </>
               ) : (
                 <>
                   <PlusCircle size={20} className="text-blue-600" />
-                  <h2 className="text-lg font-bold text-slate-900">Create User</h2>
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Create User</h2>
                 </>
               )}
             </div>
@@ -260,7 +260,7 @@ export default function AdminUsersPage() {
         {/* Users Table Card */}
         <div className="card-lg lg:col-span-2 overflow-hidden p-0">
           <div className="border-b border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100 px-8 py-5 flex items-center justify-between">
-            <h2 className="text-xl font-bold text-slate-900">All Users</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">All Users</h2>
             <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
               {users.length} total
             </span>
@@ -289,7 +289,7 @@ export default function AdminUsersPage() {
                       <div className="inline-block rounded-lg bg-slate-100 p-4 mb-3">
                         <Users size={32} className="mx-auto text-slate-400" />
                       </div>
-                      <p className="text-lg font-semibold text-slate-900 mb-1">No users found</p>
+                      <p className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-1">No users found</p>
                       <p className="text-sm text-slate-600">Create a user using the form to get started.</p>
                     </td>
                   </tr>
@@ -305,7 +305,7 @@ export default function AdminUsersPage() {
                     >
                       <td className="table-cell">
                         <div className="flex flex-col gap-1">
-                          <span className="font-semibold text-slate-900">{u.username}</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-100">{u.username}</span>
                           <span className="text-xs text-slate-500">{u.email}</span>
                           <span className="text-xs text-slate-400">ID: #{u.user_id}</span>
                         </div>

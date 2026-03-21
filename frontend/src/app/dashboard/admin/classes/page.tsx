@@ -95,7 +95,7 @@ export default function AdminClassesPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900">Manage Classes</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Manage Classes</h1>
         <p className="mt-2 text-slate-600">Create academic classes and sections.</p>
       </div>
 
@@ -103,7 +103,7 @@ export default function AdminClassesPage() {
         {/* Create Form */}
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm h-fit">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
+            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
               {editingClassId ? <Edit size={20} className="text-amber-600" /> : <PlusCircle size={20} className="text-blue-600" />}
               {editingClassId ? 'Edit Class' : 'Create Class'}
             </h2>
@@ -138,7 +138,7 @@ export default function AdminClassesPage() {
         {/* List */}
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
           <div className="border-b border-slate-200 bg-slate-50 px-6 py-4">
-            <h2 className="text-lg font-bold text-slate-800">All Classes</h2>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">All Classes</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-slate-200">
@@ -165,7 +165,7 @@ export default function AdminClassesPage() {
                   classes.map((c) => (
                     <tr key={c.class_id} className={`transition-colors ${editingClassId === c.class_id ? 'bg-amber-50' : 'hover:bg-slate-50'}`}>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{c.class_id}</td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">{c.class_name}</td>
+                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100">{c.class_name}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">{c.section}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">

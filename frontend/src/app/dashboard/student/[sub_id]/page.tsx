@@ -64,11 +64,11 @@ export default function StudentSubjectAttendancePage() {
       <div>
         <button
           onClick={() => router.push('/dashboard/student')}
-          className="mb-4 flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+          className="mb-4 flex items-center text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
         >
           <ArrowLeft size={16} className="mr-1" /> Back to Dashboard
         </button>
-        <h1 className="text-3xl font-extrabold text-slate-900">Attendance Details</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Attendance Details</h1>
         <p className="mt-2 text-slate-600">Subject ID: {subId}</p>
       </div>
 
@@ -85,7 +85,7 @@ export default function StudentSubjectAttendancePage() {
           {/* Summary Card */}
           <div className="lg:col-span-1 border border-slate-200 bg-white rounded-xl shadow-sm h-fit">
             <div className="p-6 border-b border-slate-100 bg-slate-50 rounded-t-xl">
-              <h2 className="text-lg font-bold text-slate-800">Summary Statistics</h2>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Summary Statistics</h2>
             </div>
             <div className="p-6">
               <div className="flex justify-center mb-6">
@@ -100,7 +100,7 @@ export default function StudentSubjectAttendancePage() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-100">
                   <span className="text-slate-600 font-medium">Total Classes</span>
-                  <span className="font-bold text-slate-900">{total}</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{total}</span>
                 </div>
                 <div className="flex justify-between items-center bg-green-50 p-3 rounded-lg border border-green-100 text-green-800">
                   <span className="font-medium">Present</span>
@@ -118,7 +118,7 @@ export default function StudentSubjectAttendancePage() {
           <div className="lg:col-span-2 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden h-fit">
             <div className="border-b border-slate-200 bg-slate-50 px-6 py-4 flex items-center gap-2">
               <Calendar size={20} className="text-blue-600" />
-              <h2 className="text-lg font-bold text-slate-800">Daily Records</h2>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Daily Records</h2>
             </div>
             <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
               <table className="min-w-full divide-y divide-slate-200">
@@ -133,7 +133,7 @@ export default function StudentSubjectAttendancePage() {
                     const isPresent = record.status === 'present';
                     return (
                       <tr key={record.atten_id} className="hover:bg-slate-50 transition-colors">
-                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">
+                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100">
                           {record.date}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">

@@ -147,7 +147,7 @@ export default function AdminStudentsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900">Assign Students</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Assign Students</h1>
         <p className="mt-2 text-slate-600">Map student accounts to their respective classes and assign roll numbers.</p>
       </div>
 
@@ -155,7 +155,7 @@ export default function AdminStudentsPage() {
         {/* Form */}
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm h-fit">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
+            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
               {editingStuId ? <Edit size={20} className="text-amber-600" /> : <PlusCircle size={20} className="text-blue-600" />}
               {editingStuId ? 'Edit Assignment' : 'Assign Student'}
             </h2>
@@ -224,7 +224,7 @@ export default function AdminStudentsPage() {
         {/* List */}
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
           <div className="border-b border-slate-200 bg-slate-50 px-6 py-4 flex justify-between items-center">
-            <h2 className="text-lg font-bold text-slate-800">Assigned Students</h2>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Assigned Students</h2>
             <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">{students.length} total</span>
           </div>
           <div className="overflow-x-auto">
@@ -256,7 +256,7 @@ export default function AdminStudentsPage() {
                     <tr key={s.stu_id} className={`transition-colors ${editingStuId === s.stu_id ? 'bg-amber-50' : 'hover:bg-slate-50'}`}>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-slate-900">{s.username || getUsername(s.user_id)}</span>
+                          <span className="text-sm font-bold text-slate-900 dark:text-slate-100">{s.username || getUsername(s.user_id)}</span>
                           <span className="text-xs text-slate-500">Roll No: {s.roll_no}</span>
                           <span className="text-xs text-slate-400">User ID: #{s.user_id}</span>
                         </div>

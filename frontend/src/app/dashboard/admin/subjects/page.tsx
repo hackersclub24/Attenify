@@ -130,7 +130,7 @@ export default function AdminSubjectsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900">Manage Subjects</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Manage Subjects</h1>
         <p className="mt-2 text-slate-600">Assign subjects to classes and teachers.</p>
       </div>
 
@@ -138,7 +138,7 @@ export default function AdminSubjectsPage() {
         {/* Create Form */}
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm h-fit lg:col-span-1">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
+            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-slate-100">
               {editingSubId ? <Edit size={20} className="text-amber-600" /> : <PlusCircle size={20} className="text-blue-600" />}
               {editingSubId ? 'Edit Subject' : 'Create Subject'}
             </h2>
@@ -187,7 +187,7 @@ export default function AdminSubjectsPage() {
         {/* List */}
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
           <div className="border-b border-slate-200 bg-slate-50 px-6 py-4">
-            <h2 className="text-lg font-bold text-slate-800">All Subjects</h2>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">All Subjects</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-slate-200">
@@ -215,7 +215,7 @@ export default function AdminSubjectsPage() {
                   subjects.map((s) => (
                     <tr key={s.sub_id} className={`transition-colors ${editingSubId === s.sub_id ? 'bg-amber-50' : 'hover:bg-slate-50'}`}>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{s.sub_id}</td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 border-l border-blue-100 flex items-center gap-2">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100 border-l border-blue-100 flex items-center gap-2">
                         <BookOpen size={16} className="text-blue-500" />
                         {s.sub_name}
                       </td>
