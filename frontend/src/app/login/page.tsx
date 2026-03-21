@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../lib/axios';
-import { LogIn, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
+import { LogIn, AlertCircle, Loader2, GraduationCap } from 'lucide-react';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -44,33 +45,38 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-6 rounded-2xl bg-white p-6 shadow-xl sm:space-y-8 sm:p-10">
-        <div className="text-center space-y-3 sm:space-y-4">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 sm:h-16 sm:w-16">
-            <LogIn size={24} className="sm:h-8 sm:w-8" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-              Sign in to Attenify
-            </h2>
-            <p className="mt-1.5 text-xs text-slate-600 sm:mt-2 sm:text-sm">
-              Academic Attendance Management System
-            </p>
-          </div>
-        </div>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl" />
+        <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-cyan-200/30 blur-3xl" />
+      </div>
 
-        <form className="space-y-5 sm:space-y-6" onSubmit={handleLogin}>
+      <div className="w-full max-w-md">
+        <div className="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-xl backdrop-blur-sm sm:p-10">
+          <div className="mb-8 text-center">
+            <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg">
+              <GraduationCap size={32} />
+            </div>
+            <div>
+              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+                Attenify
+              </h1>
+              <p className="mt-2 text-sm text-slate-600">
+                Academic Attendance Management System
+              </p>
+            </div>
+          </div>
+
           {error && (
-            <div className="flex gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-600 sm:p-4 sm:text-sm border border-red-200">
-              <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
-              <p>{error}</p>
+            <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4">
+              <AlertCircle size={20} className="mt-0.5 flex-shrink-0 text-red-500" />
+              <p className="text-sm font-medium text-red-700">{error}</p>
             </div>
           )}
 
-          <div className="space-y-4 sm:space-y-5">
+          <form className="space-y-5" onSubmit={handleLogin}>
             <div>
-              <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="username">
+              <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="username">
                 Username
               </label>
               <input
@@ -78,14 +84,17 @@ export default function LoginPage() {
                 name="username"
                 type="text"
                 required
-                className="relative block w-full appearance-none rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
+                autoComplete="username"
+                disabled={isLoading}
+                className="input-base border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
+
             <div>
-              <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="password">
+              <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="password">
                 Password
               </label>
               <input
@@ -93,28 +102,44 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 required
-                className="relative block w-full appearance-none rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
+                autoComplete="current-password"
+                disabled={isLoading}
+                className="input-base border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-          </div>
 
-          <div className="pt-2">
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative flex w-full justify-center rounded-lg border border-transparent bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400 sm:py-3"
+              className="mt-8 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3 font-semibold text-white shadow-md transition-all hover:from-blue-700 hover:to-blue-800 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                <>
+                  <Loader2 size={20} className="animate-spin" />
+                  <span>Signing in...</span>
+                </>
               ) : (
-                'Sign In'
+                <>
+                  <LogIn size={20} />
+                  <span>Sign In</span>
+                </>
               )}
             </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <Link href="/" className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900">
+              Back to Home
+            </Link>
           </div>
-        </form>
+        </div>
+
+        <div className="mt-8 text-center text-sm text-slate-500">
+          <p>© 2026 Attenify. All rights reserved.</p>
+        </div>
       </div>
     </div>
   );

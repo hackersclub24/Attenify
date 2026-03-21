@@ -7,7 +7,7 @@ import { Benefits } from '@/components/landing/Benefits';
 import { CTA } from '@/components/landing/CTA';
 import { Footer } from '@/components/landing/Footer';
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <div className="overflow-x-hidden bg-white">
       <Navbar />

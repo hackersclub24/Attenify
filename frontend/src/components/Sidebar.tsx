@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { useMobileMenu } from '../context/MobileMenuContext';
+import { ThemeToggle } from './ThemeToggle';
 import { Users, BookOpen, Presentation, CalendarCheck, LogOut, GraduationCap, X } from 'lucide-react';
 
 export function Sidebar() {
@@ -42,23 +43,36 @@ export function Sidebar() {
       
       {/* Sidebar */}
       <div 
-        className={`fixed left-0 top-0 z-40 flex h-screen w-64 flex-col border-r border-slate-200 bg-white shadow-lg transition-transform duration-300 ease-in-out md:relative md:z-0 md:translate-x-0 ${
+        className={`fixed left-0 top-0 z-40 flex h-screen w-64 flex-col border-r border-slate-200 bg-gradient-to-b from-slate-900 to-slate-800 shadow-2xl transition-transform duration-300 ease-in-out md:relative md:z-0 md:translate-x-0 dark:border-slate-700 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex h-16 items-center justify-between border-b border-slate-200 px-6">
-          <span className="text-2xl font-black tracking-tight text-blue-600">Attenify</span>
-          <button
-            onClick={closeMenu}
-            className="rounded-lg p-1 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
-            aria-label="Close menu"
-          >
-            <X size={20} />
-          </button>
+        <div className="flex h-20 items-center justify-between border-b border-slate-700 bg-gradient-to-r from-blue-600 to-blue-500 px-6">
+          <span className="text-2xl font-black tracking-tight text-white drop-shadow-md">Attenify</span>
+          <div className="flex items-center gap-2">
+            <ThemeToggle className="h-9 w-9 border-white/25 bg-white/10 text-white hover:bg-white/20 hover:text-white dark:border-white/25 dark:bg-white/10 dark:text-white dark:hover:bg-white/20" />
+            <button
+              onClick={closeMenu}
+              className="rounded-lg p-1 text-slate-200 transition-colors hover:bg-slate-700 md:hidden"
+              aria-label="Close menu"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+        
+        {/* User Info Card */}
+        <div className="border-b border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 p-6">
+          <div className="rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 p-4 text-white shadow-lg">
+            <p className="truncate text-sm font-bold">{user.username}</p>
+            <p className="mt-1 inline-block rounded-full bg-white bg-opacity-20 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
+              {user.role}
+            </p>
+          </div>
         </div>
         
         <div className="flex-1 overflow-y-auto py-6">
-          <nav className="space-y-2 px-4">
+          <nav className="space-y-1 px-3">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               const Icon = link.icon;
@@ -67,15 +81,15 @@ export function Sidebar() {
                   key={link.name}
                   href={link.href}
                   onClick={closeMenu}
-                  className={`group flex items-center rounded-lg px-3 py-2.5 text-sm font-semibold transition-all ${
+                  className={`group flex items-center rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
+                      : 'text-slate-300 hover:bg-slate-700 hover:text-slate-200'
                   }`}
                 >
                   <Icon
-                    className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors ${
-                      isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-500'
+                    className={`mr-3 h-5 w-5 flex-shrink-0 transition-transform ${
+                      isActive ? 'scale-110' : 'group-hover:scale-105'
                     }`}
                   />
                   {link.name}
@@ -85,16 +99,10 @@ export function Sidebar() {
           </nav>
         </div>
         
-        <div className="border-t border-slate-200 bg-slate-50 p-4">
-          <div className="mb-4 rounded-lg bg-white p-3 shadow-sm border border-slate-100">
-            <p className="truncate text-sm font-bold text-slate-900">{user.username}</p>
-            <p className="mt-0.5 text-xs font-medium uppercase tracking-wider text-blue-600">
-              {user.role}
-            </p>
-          </div>
+        <div className="border-t border-slate-700 bg-slate-900 p-4">
           <button
             onClick={logout}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-red-600 border border-slate-200 shadow-sm transition-all hover:bg-red-50 hover:border-red-200"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-red-400"
           >
             <LogOut className="h-4 w-4" />
             Log out

@@ -5,7 +5,7 @@ import api from '../../../../lib/axios';
 import { PlusCircle, Loader2 } from 'lucide-react';
 
 interface ClassData {
-  id: number;
+  class_id: number;
   class_name: string;
   section: string;
 }
@@ -120,8 +120,8 @@ export default function AdminClassesPage() {
                   </tr>
                 ) : (
                   classes.map((c) => (
-                    <tr key={c.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{c.id}</td>
+                    <tr key={c.class_id} className="hover:bg-slate-50 transition-colors">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{c.class_id}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">{c.class_name}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">{c.section}</td>
                     </tr>
