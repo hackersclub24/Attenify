@@ -1,8 +1,97 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Users, BookOpen, Calendar, TrendingUp } from 'lucide-react';
+import api from '../../lib/axios';
+
+interface PreviewStats {
+  total_students: number;
+  classes: number;
+  present_today: number;
+  avg_attendance: number;
+}
+
+interface ActivityItem {
+  name: string;
+  status: 'Complete' | 'In Progress';
+}
+
+interface TrendItem {
+  day: string;
+  percentage: number;
+}
+
+interface DashboardPreviewData {
+  stats: PreviewStats;
+  recent_activity: ActivityItem[];
+  weekly_trend: TrendItem[];
+}
+
+const defaultPreviewData: DashboardPreviewData = {
+  stats: {
+    total_students: 234,
+    classes: 12,
+    present_today: 92,
+    avg_attendance: 89,
+  },
+  recent_activity: [
+    { name: 'Class 10-A', status: 'Complete' },
+    { name: 'Class 12-B', status: 'In Progress' },
+    { name: 'Lab Session', status: 'Complete' },
+    { name: 'Tutorial', status: 'In Progress' },
+  ],
+  weekly_trend: [
+    { day: 'Mon', percentage: 92 },
+    { day: 'Tue', percentage: 88 },
+    { day: 'Wed', percentage: 95 },
+    { day: 'Thu', percentage: 85 },
+    { day: 'Fri', percentage: 91 },
+  ],
+};
 
 export function DashboardPreview() {
+  const [previewData, setPreviewData] = useState<DashboardPreviewData>(defaultPreviewData);
+
+  useEffect(() => {
+    const fetchPreview = async () => {
+      try {
+        const res = await api.get('/api/public/landing-preview');
+        setPreviewData(res.data);
+      } catch (error) {
+        console.error('Failed to fetch dashboard preview data', error);
+      }
+    };
+
+    fetchPreview();
+  }, []);
+
+  const statsCards = [
+    {
+      icon: Users,
+      label: 'Total Students',
+      value: `${previewData.stats.total_students}`,
+      color: 'from-blue-600 to-blue-700',
+    },
+    {
+      icon: BookOpen,
+      label: 'Classes',
+      value: `${previewData.stats.classes}`,
+      color: 'from-cyan-600 to-cyan-700',
+    },
+    {
+      icon: Calendar,
+      label: 'Present Today',
+      value: `${previewData.stats.present_today}%`,
+      color: 'from-emerald-600 to-emerald-700',
+    },
+    {
+      icon: TrendingUp,
+      label: 'Avg Attendance',
+      value: `${previewData.stats.avg_attendance}%`,
+      color: 'from-purple-600 to-purple-700',
+    },
+  ];
+
   return (
     <section id="demo-video" className="relative px-6 py-20 sm:py-24 lg:py-32">
       {/* Background */}
@@ -50,12 +139,7 @@ export function DashboardPreview() {
             <div className="px-8 py-8">
               {/* Top Stats */}
               <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {[
-                  { icon: Users, label: 'Total Students', value: '234', color: 'from-blue-600 to-blue-700' },
-                  { icon: BookOpen, label: 'Classes', value: '12', color: 'from-cyan-600 to-cyan-700' },
-                  { icon: Calendar, label: 'Present Today', value: '92%', color: 'from-emerald-600 to-emerald-700' },
-                  { icon: TrendingUp, label: 'Avg Attendance', value: '89%', color: 'from-purple-600 to-purple-700' },
-                ].map((stat, idx) => {
+                {statsCards.map((stat, idx) => {
                   const Icon = stat.icon;
                   return (
                     <div key={idx} className="rounded-xl bg-white p-6 border border-slate-200 hover:shadow-md transition-all">
@@ -77,13 +161,13 @@ export function DashboardPreview() {
                     <h3 className="font-bold text-slate-900">Recent Attendance</h3>
                   </div>
                   <div className="divide-y divide-slate-200">
-                    {['Class 10-A', 'Class 12-B', 'Lab Session', 'Tutorial'].map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between px-6 py-3 hover:bg-slate-50 transition-colors">
-                        <span className="text-sm font-medium text-slate-700">{item}</span>
+                    {previewData.recent_activity.map((item, idx) => (
+                      <div key={`${item.name}-${idx}`} className="flex items-center justify-between px-6 py-3 hover:bg-slate-50 transition-colors">
+                        <span className="text-sm font-medium text-slate-700">{item.name}</span>
                         <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                          idx % 2 === 0 ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                          item.status === 'Complete' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
                         }`}>
-                          {idx % 2 === 0 ? 'Complete' : 'In Progress'}
+                          {item.status}
                         </span>
                       </div>
                     ))}
@@ -94,12 +178,12 @@ export function DashboardPreview() {
                 <div className="rounded-xl border border-slate-200 bg-white p-6">
                   <h3 className="mb-4 font-bold text-slate-900">Weekly Trend</h3>
                   <div className="space-y-3">
-                    {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, idx) => {
-                      const percentage = [92, 88, 95, 85, 91][idx];
+                    {previewData.weekly_trend.map((item, idx) => {
+                      const percentage = item.percentage;
                       return (
-                        <div key={idx} className="space-y-1">
+                        <div key={`${item.day}-${idx}`} className="space-y-1">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium text-slate-700">{day}</span>
+                            <span className="text-sm font-medium text-slate-700">{item.day}</span>
                             <span className="text-sm font-bold text-slate-900">{percentage}%</span>
                           </div>
                           <div className="h-2 overflow-hidden rounded-full bg-slate-200">
