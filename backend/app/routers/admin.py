@@ -185,10 +185,16 @@ async def get_all_subjects(
     
     subjects_data = []
     for subject, teacher_name in result.all():
+        teacher_result = await db.execute(
+            select(Teacher.user_id).where(Teacher.teacher_id == subject.teacher_id)
+        )
+        teacher_user_id = teacher_result.scalar_one_or_none()
+
         subj_dict = {
             "sub_id": subject.sub_id,
             "sub_name": subject.sub_name,
             "teacher_id": subject.teacher_id,
+            "teacher_user_id": teacher_user_id,
             "class_id": subject.class_id,
             "teacher_name": teacher_name
         }
@@ -239,9 +245,19 @@ async def update_subject(
     if not subject:
         raise HTTPException(status_code=404, detail="Subject not found")
 
-    subject.sub_name   = payload.sub_name
-    subject.teacher_id = payload.teacher_id
-    subject.class_id   = payload.class_id
+    # Frontend sends user_id in teacher_id field; map to Teacher.teacher_id
+    teacher_result = await db.execute(select(Teacher).where(Teacher.user_id == payload.teacher_id))
+    teacher = teacher_result.scalar_one_or_none()
+
+    if not teacher:
+        teacher = Teacher(user_id=payload.teacher_id, dept="General")
+        db.add(teacher)
+        await db.commit()
+        await db.refresh(teacher)
+
+    subject.sub_name = payload.sub_name
+    subject.teacher_id = teacher.teacher_id
+    subject.class_id = payload.class_id
 
     await db.commit()
     await db.refresh(subject)

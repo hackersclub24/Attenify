@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import api from '../../../../lib/axios';
-import { BookOpen, PlusCircle, Loader2 } from 'lucide-react';
+import { BookOpen, PlusCircle, Loader2, Edit, Trash2, X } from 'lucide-react';
 
 interface SubjectData {
   sub_id: number;
   sub_name: string;
   teacher_id: number;
+  teacher_user_id?: number;
   class_id: number;
   teacher_name?: string; // Newly added from backend
 }
@@ -31,6 +32,7 @@ export default function AdminSubjectsPage() {
   const [loading, setLoading] = useState(true);
   
   // Form state
+  const [editingSubId, setEditingSubId] = useState<number | null>(null);
   const [subName, setSubName] = useState('');
   const [teacherId, setTeacherId] = useState('');
   const [classId, setClassId] = useState('');
@@ -59,7 +61,34 @@ export default function AdminSubjectsPage() {
     fetchData();
   }, []);
 
-  const handleCreateSubject = async (e: React.FormEvent) => {
+  const resetForm = () => {
+    setEditingSubId(null);
+    setSubName('');
+    setTeacherId('');
+    setClassId('');
+    setMessage('');
+  };
+
+  const handleEditClick = (subject: SubjectData) => {
+    setEditingSubId(subject.sub_id);
+    setSubName(subject.sub_name);
+    setTeacherId(String(subject.teacher_user_id ?? ''));
+    setClassId(String(subject.class_id));
+    setMessage('');
+  };
+
+  const handleDeleteSubject = async (subId: number) => {
+    if (!confirm('Are you sure you want to delete this subject?')) return;
+    try {
+      await api.delete(`/api/admin/subjects/${subId}`);
+      if (editingSubId === subId) resetForm();
+      fetchData();
+    } catch (error: any) {
+      setMessage(error.response?.data?.detail || 'Failed to delete subject');
+    }
+  };
+
+  const handleSubmitSubject = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!teacherId || !classId) {
       setMessage('Please select both a teacher and a class.');
@@ -70,18 +99,24 @@ export default function AdminSubjectsPage() {
     setMessage('');
 
     try {
-      await api.post('/api/admin/subjects', {
+      const payload = {
         sub_name: subName,
         teacher_id: parseInt(teacherId),
         class_id: parseInt(classId),
-      });
-      setMessage('Subject created successfully!');
-      setSubName('');
-      setTeacherId('');
-      setClassId('');
+      };
+
+      if (editingSubId) {
+        await api.put(`/api/admin/subjects/${editingSubId}`, payload);
+        setMessage('Subject updated successfully!');
+      } else {
+        await api.post('/api/admin/subjects', payload);
+        setMessage('Subject created successfully!');
+      }
+
+      resetForm();
       fetchData(); // refresh subjects list
     } catch (error: any) {
-      setMessage(error.response?.data?.detail || 'Failed to create subject');
+      setMessage(error.response?.data?.detail || `Failed to ${editingSubId ? 'update' : 'create'} subject`);
     } finally {
       setIsSubmitting(false);
     }
@@ -102,10 +137,17 @@ export default function AdminSubjectsPage() {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Create Form */}
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm h-fit lg:col-span-1">
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <PlusCircle size={20} className="text-blue-600" />
-            Create Subject
-          </h2>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
+              {editingSubId ? <Edit size={20} className="text-amber-600" /> : <PlusCircle size={20} className="text-blue-600" />}
+              {editingSubId ? 'Edit Subject' : 'Create Subject'}
+            </h2>
+            {editingSubId && (
+              <button onClick={resetForm} className="text-slate-400 hover:text-slate-600" title="Cancel Edit">
+                <X size={20} />
+              </button>
+            )}
+          </div>
           
           {message && (
             <div className={`mb-4 rounded-lg p-3 text-sm ${message.includes('success') ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
@@ -113,7 +155,7 @@ export default function AdminSubjectsPage() {
             </div>
           )}
 
-          <form onSubmit={handleCreateSubject} className="space-y-4">
+          <form onSubmit={handleSubmitSubject} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700">Subject Name</label>
               <input type="text" required value={subName} onChange={(e) => setSubName(e.target.value)} placeholder="e.g. Mathematics" className="mt-1 block w-full rounded-md border-slate-300 p-2 text-sm shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -137,7 +179,7 @@ export default function AdminSubjectsPage() {
               </select>
             </div>
             <button type="submit" disabled={isSubmitting} className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700 disabled:bg-blue-400">
-              {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : 'Create Subject'}
+              {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : editingSubId ? 'Save Changes' : 'Create Subject'}
             </button>
           </form>
         </div>
@@ -155,22 +197,23 @@ export default function AdminSubjectsPage() {
                   <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Subject Name</th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Teacher</th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Class</th>
+                  <th className="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 bg-white">
                 {loading ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-8 text-center text-slate-500">
+                    <td colSpan={5} className="px-6 py-8 text-center text-slate-500">
                       <Loader2 className="mx-auto h-6 w-6 animate-spin text-blue-600" />
                     </td>
                   </tr>
                 ) : subjects.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-8 text-center text-slate-500">No subjects found.</td>
+                    <td colSpan={5} className="px-6 py-8 text-center text-slate-500">No subjects found.</td>
                   </tr>
                 ) : (
                   subjects.map((s) => (
-                    <tr key={s.sub_id} className="hover:bg-slate-50 transition-colors">
+                    <tr key={s.sub_id} className={`transition-colors ${editingSubId === s.sub_id ? 'bg-amber-50' : 'hover:bg-slate-50'}`}>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">#{s.sub_id}</td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900 border-l border-blue-100 flex items-center gap-2">
                         <BookOpen size={16} className="text-blue-500" />
@@ -183,6 +226,24 @@ export default function AdminSubjectsPage() {
                         <span className="bg-slate-100 text-slate-700 px-2 py-1 rounded-md text-xs font-medium border border-slate-200">
                           {getClassName(s.class_id)}
                         </span>
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4 text-right">
+                        <div className="flex justify-end gap-2">
+                          <button
+                            onClick={() => handleEditClick(s)}
+                            className="text-amber-500 hover:text-amber-700 transition-colors p-1.5 rounded hover:bg-amber-100"
+                            title="Edit Subject"
+                          >
+                            <Edit size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteSubject(s.sub_id)}
+                            className="text-red-500 hover:text-red-700 transition-colors p-1.5 rounded hover:bg-red-100"
+                            title="Delete Subject"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
