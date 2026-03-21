@@ -162,19 +162,19 @@ export default function AdminSubjectsPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700">Assign Teacher</label>
-              <select required value={teacherId} onChange={(e) => setTeacherId(e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 p-2 text-sm shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                <option value="">-- Select Teacher --</option>
+              <select required value={teacherId} onChange={(e) => setTeacherId(e.target.value)} className="mt-1 block w-full rounded-md border border-slate-300 bg-white p-2 text-sm text-slate-900 shadow-sm [color-scheme:light] ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100 dark:[color-scheme:dark]">
+                <option value="" disabled className="text-slate-500">-- Select Teacher --</option>
                 {teachers.map(t => (
-                  <option key={t.user_id} value={t.user_id}>{t.username}</option>
+                  <option key={t.user_id} value={t.user_id} className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">{t.username}</option>
                 ))}
               </select>
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700">Assign Class</label>
-              <select required value={classId} onChange={(e) => setClassId(e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 p-2 text-sm shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                <option value="">-- Select Class --</option>
+              <select required value={classId} onChange={(e) => setClassId(e.target.value)} className="mt-1 block w-full rounded-md border border-slate-300 bg-white p-2 text-sm text-slate-900 shadow-sm [color-scheme:light] ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100 dark:[color-scheme:dark]">
+                <option value="" disabled className="text-slate-500">-- Select Class --</option>
                 {classes.map(c => (
-                  <option key={c.class_id} value={c.class_id}>{c.class_name} - {c.section}</option>
+                  <option key={c.class_id} value={c.class_id} className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">{c.class_name} - {c.section}</option>
                 ))}
               </select>
             </div>

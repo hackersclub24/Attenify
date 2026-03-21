@@ -179,11 +179,11 @@ export default function AdminStudentsPage() {
                 required
                 value={userId}
                 onChange={(e) => setUserId(e.target.value ? Number(e.target.value) : '')}
-                className="mt-1 block w-full rounded-md border border-slate-300 p-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border border-slate-300 bg-white p-2 text-sm text-slate-900 shadow-sm [color-scheme:light] focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100 dark:[color-scheme:dark]"
               >
-                <option value="">-- Select Student User --</option>
+                <option value="" disabled className="text-slate-500">-- Select Student User --</option>
                 {users.map(u => (
-                  <option key={u.user_id} value={u.user_id}>{u.username} ({u.email})</option>
+                  <option key={u.user_id} value={u.user_id} className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">{u.username} ({u.email})</option>
                 ))}
               </select>
             </div>
@@ -206,11 +206,11 @@ export default function AdminStudentsPage() {
                 required
                 value={classId}
                 onChange={(e) => setClassId(e.target.value ? Number(e.target.value) : '')}
-                className="mt-1 block w-full rounded-md border border-slate-300 p-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border border-slate-300 bg-white p-2 text-sm text-slate-900 shadow-sm [color-scheme:light] focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:bg-slate-900 dark:text-slate-100 dark:[color-scheme:dark]"
               >
-                <option value="">-- Select Class --</option>
+                <option value="" disabled className="text-slate-500">-- Select Class --</option>
                 {classes.map(c => (
-                  <option key={c.class_id} value={c.class_id}>{c.class_name} - {c.section}</option>
+                  <option key={c.class_id} value={c.class_id} className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">{c.class_name} - {c.section}</option>
                 ))}
               </select>
             </div>
