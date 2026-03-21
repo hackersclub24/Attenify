@@ -65,8 +65,8 @@ export function Sidebar() {
         <div className="border-b border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 p-6">
           <div className="rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 p-4 text-white shadow-lg">
             <p className="truncate text-sm font-bold">{user.username}</p>
-            <p className="mt-1 inline-block rounded-full bg-white bg-opacity-20 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
-              {user.role}
+            <p className="mt-1 inline-block rounded-full border border-white/30 bg-slate-900/30 px-2.5 py-0.5 text-xs font-semibold tracking-wider text-white">
+              {user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'User'}
             </p>
           </div>
         </div>
