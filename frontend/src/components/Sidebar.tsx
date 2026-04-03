@@ -47,9 +47,9 @@ export function Sidebar() {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex h-20 items-center justify-between border-b border-slate-700 bg-gradient-to-r from-blue-600 to-blue-500 px-6">
-          <span className="text-2xl font-black tracking-tight text-white drop-shadow-md">Attendance management system</span>
-          <div className="flex items-center gap-2">
+        <div className="flex min-h-20 items-center gap-3 border-b border-slate-700 bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3">
+          <span className="min-w-0 flex-1 break-words text-sm font-black leading-tight text-white drop-shadow-md sm:text-base">Attendance management system</span>
+          <div className="flex shrink-0 items-center gap-2">
             <ThemeToggle className="h-9 w-9 border-white/25 bg-white/10 text-white hover:bg-white/20 hover:text-white dark:border-white/25 dark:bg-white/10 dark:text-white dark:hover:bg-white/20" />
             <button
               onClick={closeMenu}

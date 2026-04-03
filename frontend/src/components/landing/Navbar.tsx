@@ -17,17 +17,17 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-950/80">
       <div className="mx-auto max-w-7xl px-6 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-2xl font-black">
+          <Link href="/" className="flex min-w-0 items-center gap-2 text-xl font-black sm:text-2xl">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white">
               <GraduationCap size={24} />
             </div>
-            <span className="text-slate-900">Attendance management system</span>
+            <span className="max-w-[12rem] truncate text-slate-900 sm:max-w-[18rem] lg:max-w-none">Attendance management system</span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -40,7 +40,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop Buttons */}
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-4 lg:flex">
             <ThemeToggle />
             <Link
               href="/login"
