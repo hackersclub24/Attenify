@@ -23,7 +23,7 @@ export function Navbar() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white">
               <GraduationCap size={24} />
             </div>
-            <span className="text-slate-900">Attenify</span>
+            <span className="text-slate-900">Attendance management system</span>
           </Link>
 
           {/* Desktop Menu */}

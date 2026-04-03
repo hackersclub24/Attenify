@@ -125,7 +125,7 @@ export function DashboardPreview() {
                   A
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Attenify Dashboard</p>
+                  <p className="text-sm font-semibold text-slate-900">Attendance management system Dashboard</p>
                   <p className="text-xs text-slate-500">Logged in as Admin</p>
                 </div>
               </div>

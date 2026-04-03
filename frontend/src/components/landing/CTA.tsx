@@ -19,7 +19,7 @@ export function CTA() {
           Start Managing Attendance the Smart Way
         </h2>
         <p className="mt-6 text-xl text-slate-300">
-          Join 100+ schools already using Attenify to streamline their operations and save countless hours.
+          Join 100+ schools already using Attendance management system to streamline their operations and save countless hours.
         </p>
 
         {/* CTA Buttons */}

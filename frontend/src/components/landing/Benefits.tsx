@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: 'Rajesh Kumar',
     role: 'School Principal',
-    content: 'Attenify has transformed how we manage attendance. What used to take hours now takes minutes. Highly recommended!',
+    content: 'Attendance management system has transformed how we manage attendance. What used to take hours now takes minutes. Highly recommended!',
     school: 'Delhi Public School',
   },
   {
@@ -72,7 +72,7 @@ export function Benefits() {
             Trusted by Educational Institutions
           </h2>
           <p className="mt-4 text-xl text-slate-600">
-            Schools and administrators worldwide are using Attenify to streamline their operations.
+            Schools and administrators worldwide are using Attendance management system to streamline their operations.
           </p>
         </div>
 

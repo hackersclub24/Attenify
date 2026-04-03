@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Attenify - Attendance Management",
+  title: "Attendance management system - Attendance Management",
   description: "Academic attendance management system",
 };
 

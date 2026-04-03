@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="sticky top-0 z-30 flex items-center gap-4 border-b border-slate-200 bg-white bg-opacity-95 px-4 py-4 shadow-sm backdrop-blur md:hidden dark:border-slate-700 dark:bg-slate-950/95">
             <MobileMenuToggle />
             <div className="flex flex-1 items-center justify-between">
-              <h1 className="text-lg font-bold text-slate-900 dark:text-white">Attenify Dashboard</h1>
+              <h1 className="text-lg font-bold text-slate-900 dark:text-white">Attendance management system Dashboard</h1>
               <ThemeToggle />
             </div>
           </div>

@@ -48,7 +48,7 @@ export function Sidebar() {
         }`}
       >
         <div className="flex h-20 items-center justify-between border-b border-slate-700 bg-gradient-to-r from-blue-600 to-blue-500 px-6">
-          <span className="text-2xl font-black tracking-tight text-white drop-shadow-md">Attenify</span>
+          <span className="text-2xl font-black tracking-tight text-white drop-shadow-md">Attendance management system</span>
           <div className="flex items-center gap-2">
             <ThemeToggle className="h-9 w-9 border-white/25 bg-white/10 text-white hover:bg-white/20 hover:text-white dark:border-white/25 dark:bg-white/10 dark:text-white dark:hover:bg-white/20" />
             <button

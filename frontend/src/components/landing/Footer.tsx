@@ -14,7 +14,7 @@ export function Footer() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white">
                 <GraduationCap size={24} />
               </div>
-              <span className="text-xl font-black text-slate-900">Attenify</span>
+              <span className="text-xl font-black text-slate-900">Attendance management system</span>
             </div>
             <p className="text-sm text-slate-600">
               Smart attendance management for modern educational institutions.
@@ -134,7 +134,7 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-12 border-t border-slate-200 pt-8 flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-slate-600">
-            © 2026 Attenify. All rights reserved.
+            © 2026 Attendance management system. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-sm text-slate-600">
             <span>Made with ❤️ for educators</span>

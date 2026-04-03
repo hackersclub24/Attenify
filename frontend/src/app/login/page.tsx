@@ -59,7 +59,7 @@ export default function LoginPage() {
             </div>
             <div>
               <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
-                Attenify
+                Attendance management system
               </h1>
               <p className="mt-2 text-sm text-slate-600">
                 Academic Attendance Management System
@@ -138,7 +138,7 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-8 text-center text-sm text-slate-500">
-          <p>© 2026 Attenify. All rights reserved.</p>
+          <p>© 2026 Attendance management system. All rights reserved.</p>
         </div>
       </div>
     </div>

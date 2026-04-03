@@ -1,7 +1,7 @@
-# Responsive Design Updates - Attenify Frontend
+# Responsive Design Updates - Attendance management system Frontend
 
 ## Overview
-Your Attenify frontend has been updated to be fully responsive across all device sizes (mobile, tablet, desktop). The changes include a mobile menu system, improved breakpoints, and better responsive layouts.
+Your Attendance management system frontend has been updated to be fully responsive across all device sizes (mobile, tablet, desktop). The changes include a mobile menu system, improved breakpoints, and better responsive layouts.
 
 ## Key Changes Made
 
