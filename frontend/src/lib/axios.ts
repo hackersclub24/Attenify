@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // baseURL: 'http://localhost:8000',
-  baseURL: 'https://attenify.onrender.com',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://attenify.onrender.com',
 });
 
 api.interceptors.request.use(
