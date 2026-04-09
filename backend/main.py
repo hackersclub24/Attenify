@@ -29,7 +29,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://attenify.vercel.app"
+        "https://attenify.vercel.app",
+        "https://attendance-management-system-bay.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
